@@ -8,9 +8,19 @@
         </div>
         <div class="col-sm-3 no-left-padding">
         <%= button_tag type: :submit, class: "btn btn-success" do  %>
+        <%# from FontAwesome gem %>
             <%= fa_icon 'search 2x'  %>
         <% end %>
         </div>
         </div>
     <% end %>
 </div>
+<%# Only load the page data if the @stock variable exists %>
+<%# On first load, this will not exist, because a stock query has not yet been requested %>
+<% if @stock %>
+    <div class="card card-header results-block">
+        <strong>Symbol: </strong><%= @stock.ticker %>
+        <strong>Name: </strong><%= @stock.name %>
+        <strong>Price: </strong><%= @stock.last_price %>
+    </div>
+<% end %>

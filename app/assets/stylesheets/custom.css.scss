@@ -3,6 +3,7 @@
 //     font-size: 3rem;
 // }
 
+// Below changes padding for Stock search form on portfolio page //
 .search-area {
   padding-top: 50px;
 }
@@ -11,4 +12,7 @@
 }
 .no-left-padding {
   padding-left: 0 !important;
+}
+.results-block {
+  display: inline-block;
 }
