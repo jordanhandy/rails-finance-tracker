@@ -8,6 +8,10 @@ class Stock < ApplicationRecord
           )
         # create a new Stock object, with the ticker symbol, company name, and price.
         # check the IEX gem documentation for information on how each of these methods are called
+        begin  
           new(ticker: ticker_symbol, name: client.company(ticker_symbol).company_name, last_price: client.price(ticker_symbol))
+        rescue => exception
+          return nil
+        end
     end
 end
