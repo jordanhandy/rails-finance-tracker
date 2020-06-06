@@ -33,4 +33,36 @@ def full_name
   return "#{first_name} #{last_name}" if first_name || last_name
   "Anonymous"
 end
+
+### Search methods for finding users  ###
+
+# Strip all whitespace
+# return results from other methods, or nil if nothing returned back
+# returns unique values of results from all 3 methods
+
+def self.search(param)
+  param.strip!
+  to_send_back = (first_name_matches(param) + last_name_matches(param) + email_matches(param)).uniq
+  return nil unless to_send_back
+  to_send_back
+end
+
+# Search for first_name, last_name, and email fields
+# given params
+def self.first_name_matches(param)
+  matches('first_name',param)
+end
+def self.last_name_matches(param)
+  matches('last_name',param)
+end
+def self.email_matches(param)
+  matches('email',param)
+end
+
+# method to do searches on users, when trying to find users
+# search for mathes on a specific field name, given a specific param
+def self.matches(field_name, param)
+  where("#{field_name} like ?", "%#{param}%")
+end
+
 end
