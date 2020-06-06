@@ -3,16 +3,24 @@
 </div>
 <%# Only load the page data if the @stock variable exists %>
 <%# On first load, this will not exist, because a stock query has not yet been requested %>
-<% if @friend %>
+<% if @friends %>
   <div class="card card-header results-block">
-  <%# comes from the controller %>
-    <strong>Symbol: </strong>Jordan
-    <strong>Name: </strong>Jordan
-    <strong>Price: </strong>Jordan
+  <table class="col-md-12">
+  <tbody>
 
-    <%# these methods come from the user model %>
-    <%# if the user is able to track stock, show the "add to portfolio" button %>
-    <%# if not, then you either are tracking too many stocks (> 10), or you are already tracking a stock that you are trying to track again %>
-      <%= link_to 'Add to Portfolio', user_stocks_path(user: current_user, ticker: @stock.ticker), class: "btn btn-success", method: :post  %>
+    <% @friends.each do |friend| %>
+    <tr>
+      <%# comes from the controller %>
+      <td><strong>Name: </strong><%= friend.full_name %></td>
+      <td><strong>Email: </strong><%= friend.email %></td>
+      <td><strong>Actions: </strong><%= link_to "View Profile", '#', class: "btn btn-sm btn-success"%>
+      <%# these methods come from the user model %>
+      <%# if the user is able to track stock, show the "add to portfolio" button %>
+      <%# if not, then you either are tracking too many stocks (> 10), or you are already tracking a stock that you are trying to track again %>
+      <%= link_to 'Add to Portfolio', user_stocks_path(user: current_user, ticker: @stock.ticker), class: "btn btn-success", method: :post  %></td>
+    </tr>
+    <% end %>
+    </tbody>
+    </table>
   </div>
 <% end %>

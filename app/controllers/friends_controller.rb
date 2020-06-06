@@ -7,9 +7,11 @@ class FriendsController < ApplicationController
         # if stock not found, alert user
         if params[:friend].present?
         # in stock.rb file
-        # @stock variable for view
-            @friend = params[:friend]
-            if @stock
+        # @friend variable for view
+        # the search method can be found in the User controller
+            @friends = User.search(params[:friend])
+            @friends = current_user.except_current_user(@friends)
+            if @friends
                 respond_to do |format|
                     format.js { render partial: 'friends/result' }
                 end
