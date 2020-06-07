@@ -13,7 +13,7 @@
       <%# comes from the controller %>
       <td><strong>Name: </strong><%= friend.full_name %></td>
       <td><strong>Email: </strong><%= friend.email %></td>
-      <td><strong>Actions: </strong><%= link_to "View Profile", '#', class: "btn btn-sm btn-success"%>
+      <td><strong>Actions: </strong><%= link_to "View Profile", user_path(friend), class: "btn btn-sm btn-success"%>
       <%# these methods come from the user model %>
       <%# if the user is able to track stock, show the "add to portfolio" button %>
       <%# if not, then you either are tracking too many stocks (> 10), or you are already tracking a stock that you are trying to track again %>

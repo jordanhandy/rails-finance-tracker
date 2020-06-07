@@ -1,0 +1,27 @@
+<h2>User Details</h2>
+<div class="card card-header results-block">
+  <table class="col-md-12">
+    <tbody>
+      <tr>
+        <%# comes from the controller %>
+        <td><strong>Name: </strong><%= @user.full_name %></td>
+        <td><strong>Email: </strong><%= @user.email %></td>
+        <td>
+          <%# these methods come from the user model %>
+          <%# if the user is able to track stock, show the "add to portfolio" button %>
+          <%# if not, then you either are tracking too many stocks (> 10), or you are already tracking a stock that you are trying to track again %>
+          <% if current_user.not_friends_with?(@user.id %>
+            <%= link_to 'Follow Friend', friendships_path(friend: @user), class: "btn btn-success", method: :post  %></td>
+        <% else %>
+          <span class="badge badge-secondary">You are already friends</span>
+        <% end %>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<%# @tracked_stocks is from the Users Controller %>
+<% if !@tracked_stocks.empty? %>
+  <%= render 'stocks/list' %>
+<% else %>
+<p class='lead'>This user is not tracking any stocks</p>
+<% end %>
